@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dondapati Theerdha Purushotham – AI & Full-Stack Developer Portfolio">
+    <title>D.Theerdha Purushotham | Strategic AI Grandmaster</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --panel: #0f172a;
+            --border: #1e293b;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --gold: #fbbf24;
+            --blue: #38bdf8;
+            --glass: rgba(15, 23, 42, 0.9);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 0% 0%, #1e1b4b 0%, transparent 50%),
+                              radial-gradient(circle at 100% 100%, #0c4a6e 0%, transparent 50%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1400px; margin: auto; padding: 0 40px; }
+        .section { padding: 120px 0; border-bottom: 1px solid var(--border); }
+        .section-title {
+            text-align: center; font-size: 3rem; margin-bottom: 80px; color: var(--gold);
+            text-transform: uppercase; letter-spacing: 4px; font-weight: 800;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--glass); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+        }
+        .navbar-container {
+            display: flex; justify-content: space-between; align-items: center; padding: 20px 50px;
+        }
+        /*.logo { font-weight: 800; font-size: 1.4rem; color: var(--gold); text-decoration: none; }*/
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { font-weight: 600; font-size: 0.85rem; transition: 0.3s; color: var(--muted); text-decoration: none; text-transform: uppercase; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-logo { height: 30px;   /* same visual size as text */ width: auto; display: block; }
+
+        /* HERO */
+        #home { min-height: 100vh; display: flex; align-items: center; }
+        .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+        .hero-name { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 20px;}
+        .hero-title { font-size: 2rem; margin-bottom: 25px; color: var(--text); }
+        .hero-title span { color: var(--blue); }
+        .btn {
+            display: inline-block; padding: 16px 40px; border-radius: 4px; font-weight: 700;
+            transition: 0.4s; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-primary { background: var(--gold); color: #000; border: none; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3); }
+
+        .profile-wrapper { position: relative; }
+        .profile-container {
+            width: 400px; height: 400px; margin: auto;
+            border: 2px solid var(--gold); padding: 15px;
+            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+            animation: float 6s ease-in-out infinite;
+        }
+        .profile-container img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* 5x5 GRID (SKILLS & PROJECTS) */
+        .grid-5x5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background: var(--panel); border: 1px solid var(--border);
+            padding: 25px; border-radius: 4px; transition: 0.4s; position: relative;
+            overflow: hidden;
+        }
+        .card:hover { border-color: var(--gold); transform: scale(1.02); background: #162036; }
+        .card i { font-size: 2rem; color: var(--blue); margin-bottom: 15px; }
+        .card h3 { font-size: 1rem; margin-bottom: 10px; color: var(--gold); }
+        .card p { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+
+        /* PROJECT SPECIFIC */
+        .project-tag { font-size: 0.7rem; color: var(--blue); font-weight: bold; margin-top: 10px; display: block; }
+
+        /* EXPERIENCE SIDE-BY-SIDE (3 Column with dividers) */
+        .experience-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            border: 1px solid var(--border);
+            background: var(--panel);
+        }
+        .exp-col {
+            padding: 40px;
+            border-right: 1px solid var(--border);
+        }
+        .exp-col:last-child { border-right: none; }
+        .exp-item { margin-bottom: 40px; }
+        .exp-date { color: var(--gold); font-weight: 700; font-size: 0.8rem; margin-bottom: 10px; display: block;}
+        .exp-role { font-size: 1.2rem; font-weight: 800; color: var(--text); }
+        .exp-org { color: var(--blue); margin-bottom: 15px; font-weight: 600;}
+        .exp-list { list-style: none; font-size: 0.85rem; color: var(--muted); }
+        .exp-list li { margin-bottom: 8px; position: relative; padding-left: 20px;}
+        .exp-list li::before { content: "→"; position: absolute; left: 0; color: var(--gold); }
+
+        /* CERTIFICATIONS LIST */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px, 1fr)); gap: 40px; }
+        .cert-category h3 { color: var(--blue); border-bottom: 2px solid var(--gold); display: inline-block; margin-bottom: 20px; }
+        .cert-category ul { list-style: none; }
+        .cert-category li { margin-bottom: 10px; font-size: 0.9rem; color: var(--muted); }
+        .cert-category li strong { color: var(--text); }
+
+        /* CONTACT SECTION IMPROVED */
+        .contact-wrapper {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center;
+        }
+        .contact-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0;
+        }
+        .stat-box { padding: 20px; border: 1px solid var(--border); text-align: center; background: rgba(255,255,255,0.02); }
+        .stat-box h4 { font-size: 2rem; color: var(--gold); }
+        
+        .contact-card {
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            padding: 50px; border-radius: 8px; border-top: 4px solid var(--gold);
+        }
+        .contact-method { margin-bottom: 25px; }
+        .contact-method label { color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .contact-method p { font-size: 1.1rem; font-weight: 600; }
+
+        /* UTILS */
+        #hire-badge {
+            position: fixed; bottom: 100px; left: 40px; background: var(--gold); color: black;
+            padding: 10px 20px; font-weight: 800; transform: rotate(-90deg); transform-origin: left bottom;
+            z-index: 100; font-size: 0.7rem; letter-spacing: 2px;
+        }
+        #chess-ui {
+            position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
+            border-left: 1px solid var(--gold); padding-left: 20px; z-index: 100;
+        }
+        .piece-name { display: block; font-weight: 800; color: var(--gold); text-transform: uppercase; font-size: 0.8rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .grid-5x5 { grid-template-columns: repeat(3, 1fr); }
+            .experience-layout { grid-template-columns: 1fr 1fr; }
+            .exp-col:nth-child(2) { border-right: none; }
+        }
+        @media (max-width: 768px) {
+            .grid-5x5 { grid-template-columns: repeat(1, 1fr); }
+            .experience-layout, .contact-wrapper, .hero, .cert-grid { grid-template-columns: 1fr; }
+            .exp-col { border-right: none; border-bottom: 1px solid var(--border); }
+            .container { padding: 0 20px; }
+            .navbar-container { padding: 15px 20px; }
+            .nav-links { display: none; }
+        }
+        /*Recuriter mode*/
+        #recruiter-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 18px;
+            background: var(--gold);
+            color: black;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .recruiter-mode .card,
+        .recruiter-mode .exp-item {
+            transform: scale(1.05);
+            border-color: var(--gold);
+
+        }
+    </style>
+</head>
+<body>
+
+    <div id="hire-badge">ANALYSIS: HIGHLY RECOMMENDED</div>
+
+    <div id="chess-ui">
+        <span style="font-size: 0.6rem; color: var(--muted); text-transform: uppercase;">Active Strategy</span>
+        <span id="active-piece-name" class="piece-name">Grandmaster</span>
+        <div id="move-status" style="font-size: 0.7rem; color: var(--blue);">Calculating...</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="logo"><img src="logo.png" alt="Purushotham Logo" class="nav-logo"><span style="color:var(--gold); font-weight:900;">Checkmate</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <a href="Profile.pdf" download target="_blank">
+                        Resume
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="section">
+        <div class="container hero">
+            <div>
+                <h1 class="hero-name">Dondapati Theerdha Purushotham</h1>
+                <h2 class="hero-title">Strategic <span>AI Creator</span> & Developer</h2>
+                <p style="color: var(--muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 40px;">
+                    Every move calculated. Every project precise. Turning complex logic into elegant digital solutions through the lens of a strategic thinker.
+                </p>
+                <div style="display: flex; gap: 20px;">
+                    <a class="btn btn-primary" href="#about">Begin Game</a>
+                    <a class="btn" style="border: 1px solid var(--muted); color: var(--text);" href="#projects">View Moves</a>
+                </div>
+            </div>
+            <div class="profile-wrapper">
+                <div class="profile-container">
+                    <img src="New-Profile.jpg" loading="lazy" alt="Purushotham Profile">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">The Strategist</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+                <div>
+                    <h3 style="color: var(--blue); margin-bottom: 20px; font-size: 1.5rem;">Thinker • Developer • Problem Solver</h3>
+                    <p style="margin-bottom: 20px;">I am a B.Tech student specializing in <strong>AI & ML</strong> at NRI Institute of Technology (CGPA: <strong>8.8</strong>). I approach software development like a high-stakes chess match: analyzing patterns, anticipating bottlenecks, and executing with precision.</p>
+                    <div style="padding: 25px; background: var(--panel); border-left: 4px solid var(--gold); margin-bottom: 20px;">
+                        <p><strong>Education:</strong> NRI Institute of Technology</p>
+                        <p><strong>Core Focus:</strong> Vibe Coding & Agentic AI</p>
+                    </div>
+                    <a href="https://www.linkedin.com/in/dondapati-theerdha-purushotham/" target="_blank" style="color:var(--blue); font-weight:bold; text-decoration:none;">
+                        <u>VIEW LINKEDIN PROFILE <i class="fab fa-linkedin"></i></u>
+                    </a>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.02); border: 1px dashed var(--border); padding: 40px;">
+                    <p style="font-size: 1.5rem; line-height: 1.8; font-style: italic; color: var(--muted); text-align: center;">
+                        "Great development, like great chess, is not about speed — it’s about vision, patience, and making every move count."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <div class="grid-5x5">
+                <div class="card"><i class="fab fa-python"></i><h3>Python & AI</h3><p>ML, GenAI, and real-world data modeling.</p></div>
+                <div class="card"><i class="fas fa-code"></i><h3>Full-Stack</h3><p>Responsive apps with ReactJS & Modern UI.</p></div>
+                <div class="card"><i class="fas fa-server"></i><h3>Backend</h3><p>NodeJS, REST APIs, and MongoDB scaling.</p></div>
+                <div class="card"><i class="fab fa-java"></i><h3>Java & OOP</h3><p>Solid foundation in Data Structures.</p></div>
+                <div class="card"><i class="fas fa-brain"></i><h3>Logic</h3><p>Advanced problem solving & optimization.</p></div>
+                <div class="card"><i class="fas fa-lightbulb"></i><h3>Creative Thinking</h3><p>Innovative mindset for engaging with new future.</p></div>
+                <div class="card"><i class="fas fa-comments"></i><h3>Team Collab</h3><p>Effective stakeholder communication.</p></div>
+                <div class="card"><i class="fas fa-language"></i><h3>English Fluency</h3><p>Professional technical documentation.</p></div>
+                <div class="card"><i class="fas fa-clock"></i><h3>Management</h3><p>Time & resource efficiency.</p></div>
+                <div class="card"><i class="fas fa-chart-line"></i><h3>Growth</h3><p>Fast adaptation to industry trends.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Games Played (Projects)</h2>
+            <div class="grid-5x5">
+                <div class="card"><h3>SmartTransitUI</h3><p>Hackathon: Real-time crowd & congestion prediction.</p><span class="project-tag">TypeScript</span></div>
+                <div class="card"><h3>GitHub Explorer</h3><p>Interactive dashboard for repo activity metrics.</p><span class="project-tag">JavaScript / API</span></div>
+                <div class="card"><h3>Weather App</h3><p>Real-time location-based weather forecasting.</p><span class="project-tag">JavaScript</span></div>
+                <div class="card"><h3>Landing Page</h3><p>High-performance modern layout structure.</p><span class="project-tag">HTML/CSS</span></div>
+                <div class="card"><h3>Sci-Calculator</h3><p>Scientific functions with keyboard support logic.</p><span class="project-tag">Logic</span></div>
+                <div class="card"><h3>AppNote</h3><p>Python-based editor built for focus and efficiency.</p><span class="project-tag">Python</span></div>
+                <div class="card"><h3>TaskFlow</h3><p>Professional task management and tracking.</p><span class="project-tag">JS</span></div>
+                <div class="card"><h3>Typing Speed</h3><p>Accuracy testing tool for productivity.</p><span class="project-tag">Performance</span></div>
+                <div class="card"><h3>Book API</h3><p>REST-based management for book data fetch.</p><span class="project-tag">Backend</span></div>
+                <div class="card"><h3>Portfolio Sites</h3><p>Clean minimal designs for content presentation.</p><span class="project-tag">UI/UX</span></div>
+            </div>
+            <p style="text-align:center; margin-top: 50px;">
+                <a href="https://github.com/DONDAPATI-THEERDHA-PURUSHOTHAM" target="_blank" class="btn" style="border: 1px solid var(--gold); color: var(--gold);">Explore All my GitHub Moves ♟</a>
+            </p>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Games Mastered</h2>
+            <div class="experience-layout">
+                <div class="exp-col">
+                    <div class="exp-item">
+                        <span class="exp-date">JUN 2025 - JUL 2025 · Remote</span>
+                        <h3 class="exp-role">Web Development Intern</h3>
+                        <p class="exp-org">Elevate Labs · Internship</p>
+                        <ul class="exp-list">
+                            <li>Deployed 3+ interactive apps (Weather, Portfolio).</li>
+                            <li>Optimized UI responsiveness by 30%.</li>
+                            <li>Integrated real-time JSON APIs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp-col">
+                    <div class="exp-item">
+                        <span class="exp-date">JUN 2025 - JUL 2025 · Remote</span>
+                        <h3 class="exp-role">Web Development Intern</h3>
+                        <p class="exp-org">Vault of Codes · Internship</p>
+                        <ul class="exp-list">
+                            <li>Implemented DOM manipulation to reduce latency by 20%.</li>
+                            <li>Refined UI/UX workflows for student-facing projects.</li>
+                            <li>Delivered clean, maintainable front-end code.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp-col">
+                    <div class="exp-item">
+                        <span class="exp-date">MAR 2025 · On-site</span>
+                        <h3 class="exp-role">GenAI Student Mentor</h3>
+                        <p class="exp-org">NRI Institute of Technology</p>
+                        <ul class="exp-list">
+                            <li>Mentored 15+ students in Generative AI concept, Prompt Engineering, and project prototyping.</li>
+                            <li>Secured 3rd Prize in workshop competition.</li>
+                            <li>Practical hands-on AI prototyping.</li>
+                        </ul>
+                    </div>
+                    <!--div class="exp-item" style="margin-top:20px; border-top: 1px solid var(--border); padding-top:20px;">
+                        <span class="exp-date">AUG 2024 · Remote</span>
+                        <h3 class="exp-role">LinkedIn </h3>
+                        <p class="exp-org">Professional Branding</p>
+                    </div-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="section">
+        <div class="container">
+            <h2 class="section-title">Opening Theory (Certifications)</h2>
+            <div class="cert-grid">
+                <div class="cert-category">
+                    <h3>AI & Generative AI</h3>
+                    <ul>
+                        <li><strong>Google Startup School:</strong> Prompt to Prototype (Dec 2025)</li>
+                        <li><strong>IBM SkillsBuild:</strong> AI Fundamentals (Oct 2025)</li>
+                        <li><strong>Google Cloud:</strong> Agentic AI Day by Hackeskill (Sep 2025)</li>
+                        <li><strong>DeepLearning.AI:</strong> ChatGPT Prompt Engineering (Jun 17, 2025)</li>
+                        <li><strong>Infosys Springboard:</strong> Intro to Gen AI (Jun 7, 2025)</li>
+                        <li><strong>Microsoft Learn:</strong> Introduction to AI Fundamentals & Concepts(Nov 27, 2025)</li>
+                        <li><strong>Skillsoft:</strong> Introduction to Gen AI</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h3>Programming & CS</h3>
+                    <ul>
+                        <li><strong>NPTEL/ SWAYAM:</strong> Programming in Python (Score: 86%) – Jan 11, 2025</li>
+                        <li><strong>Great Learning:</strong> Java Programming (Sep 2024)</li>
+                        <li><strong>Great Learning:</strong> OOPS in Java (Sep 2024)</li>
+                        <li><strong>LinkedIn Learning:</strong> Learning C++ (Sep 15, 2024)</li>
+                        <li><strong>LinkedIn Learning:</strong> Learning Python (Dec 15, 2024)</li>
+                        <li><strong>Sololearn:</strong> Introduction to Java (Oct 21, 2024)</li>
+                        <li><strong>Sololearn:</strong> Java Intermediate (Nov 13, 2024)</li>
+                        <li><strong>Great Learning:</strong> Data Structures in C (Sep 2024)</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h3>🌐 Web Development & APIs</h3>
+                    <ul>
+                        <li><strong>SWAYAM:</strong> Web Technologies (Score: 75%) – Jan 26, 2025</li>
+                        <li><strong>LetsUpgrade:</strong> Build with AI (API Development & AI Apps) – Apr 26, 2025</li>
+                        <li><strong>LetsUpgrade:</strong> Build Weather App using APIs & JavaScript – Jul 8, 2025</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h3>📊 Productivity & Professional Skills</h3>
+                    <ul>
+                        <li><strong>Alison:</strong> Fundamentals of Business & Money Management (Oct 26, 2025)</li>
+                        <li><strong>Infosys Springboard:</strong> Time Management (Jun 30, 2025)</li>
+                        <li><strong>LinkedIn Learning:</strong> Career Readiness, Teamwork & Leadership (Apr–May 2024)</li>
+                        <li><strong>LinkedIn Learning:</strong> Communication & Advanced Grammar (Sep 25, 2025)</li>
+                        <li><strong>FutureSkills Prime:</strong> Introduction to Virtual Reality (VR) (Aug 22, 2025)</li>
+                        <li><strong>Great Learning:</strong> Excel for Beginners (Sep 2024)</li>
+                        <li><strong>Great Learning:</strong> Excel for Intermediate Level (Sep 2024)</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h3>⌨️ Performance & Accuracy</h3>
+                    <ul>
+                        <li><strong>Typing.com:</strong> Typing Performance Certificate (Sep 10, 2024)</li>
+                        <li>Typing Speed: 30 WPM | Accuracy: 97%</li>
+                    </ul>
+                </div>
+                <div class="cert-category">
+                    <h3>🚀 Hackathons & Major Achievements</h3>
+                    <ul>
+                        <li><strong>MindSprint 2K25: National Level Hackathon</strong><br>
+                            36-Hour Continuous Hackathon (Dec 2025)<br>
+                            Built <em>Smart Transport Intelligence System (SmartTransitUI)</em> 
+                            focusing on crowd prediction, congestion analysis, and real-time commuter decision support.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container contact-wrapper">
+            <div>
+                <h2 style="font-size: 3rem; color: var(--gold);">Let’s Build Something <span>Impactful</span></h2>
+                <p style="color: var(--muted); margin: 20px 0;">Strategy first, execution precise. I am currently open to remote roles and strategic collaborations.</p>
+                
+                <div class="contact-stats">
+                    <div class="stat-box"><h4>5+</h4><p>Projects</p></div>
+                    <div class="stat-box"><h4>8.8</h4><p>CGPA</p></div>
+                    <div class="stat-box"><h4>100%</h4><p>Commitment</p></div>
+                </div>
+
+                <div style="display: flex; gap: 15px;">
+                    <a href="https://www.linkedin.com/in/dondapati-theerdha-purushotham" class="btn" style="background:darkblue; color: white">Connect with Me</a>
+                    <a href="https://github.com/DONDAPATI-THEERDHA-PURUSHOTHAM" class="btn btn-primary">GitHub</a>
+		    <a href="https://www.instagram.com/skysii.groups" class="btn" style="background: #fff; color: Red;">Instagram</a>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <h3 style="margin-bottom: 30px; font-size: 1.5rem;">Contact Details</h3>
+                <div class="contact-method">
+                    <label>Full Name</label>
+                    <p>Dondapati Theerdha Purushotham</p>
+                </div>
+                <div class="contact-method">
+                    <label>Direct Line</label>
+                    <p>+91 9550488854</p>
+                </div>
+                <div class="contact-method">
+                    <label>Strategic Location</label>
+                    <p>India · Remote Ready</p>
+                </div>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dtpurushotham2005@gmail.com" target="_blank" 
+                    style="display:block; text-align:center; margin-top:30px; color: var(--gold); font-weight: 800; text-decoration: none; border: 1px solid var(--gold); padding: 15px;">
+                    MAKE THE FIRST MOVE ♟,<br>
+                <u>EVERY DOWNFALL IS TO RISE HIGH.</u>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 50px 0; text-align: center; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem;">
+        			© 2026 Dondapati Theerdha Purushotham<br> 
+				<b>· I DON'T WAIT FOR THE FUTURE-I BUILT IT</b> <br>
+				<b><u>THE RESULT WAS DECIDED IN PREPARATION.</u></b>
+    </footer>
+
+    <script>
+        const pieceData = {
+            'home': { name: 'The Chessboard', status: 'Positioning...' },
+            'about': { name: 'The King', status: 'Ruler bio...' },
+            'skills': { name: 'The Queen', status: 'Dominating Grid...' },
+            'projects': { name: 'The Rook', status: 'Straight Execution...' },
+            'experience': { name: 'The Knight', status: 'L-Shaped Moves...' },
+            'certifications': { name: 'The Bishop', status: 'Diagonal Cross...' },
+            'contact': { name: 'The Pawn', status: 'Promoting...' }
+        };
+
+        window.addEventListener('scroll', () => {
+            let current = 'home';
+            const sections = ['home', 'about', 'skills', 'projects', 'experience', 'certifications', 'contact'];
+            
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (window.scrollY >= (section.offsetTop - 200)) {
+                    current = id;
+                }
+            });
+
+            document.getElementById('active-piece-name').innerText = pieceData[current].name;
+            document.getElementById('move-status').innerText = pieceData[current].status;
+        });
+        
+        const autoSections = document.querySelectorAll('.section');
+        let index = 0;
+        let autoScroll;
+        setTimeout(() => {
+            autoScroll = setInterval(scrollNext, 7000);
+        }, 400);
+        
+        function scrollNext() {
+            if (index < autoSections.length) {
+                autoSections[index].scrollIntoView({ behavior: 'smooth' });
+                index++;
+            } else {
+                // After last section, go back to HOME once and stop
+                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+                clearInterval(autoScroll);
+            }
+        }
+        
+        ['wheel', 'touchstart', 'keydown'].forEach(evt =>
+            window.addEventListener(evt, () => clearInterval(autoScroll), { once: true })
+        );
+        
+        /*if (section) {
+            if (window.scrollY >= section.offsetTop - 200) {
+                current = id;
+            }
+        }*/
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('recruiter-toggle').onclick = () => {
+                document.body.classList.toggle('recruiter-mode');
+            };
+        });
+    </script>
+
+    <button id="recruiter-toggle" aria-label="Toggle Recruiter Focus Mode">
+        IMPOSSIBLE IS NOTHING.
+    </button>
+</body>
+</html>
